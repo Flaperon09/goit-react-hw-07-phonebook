@@ -3,22 +3,20 @@ import { GlobalStyle } from "../GlobalStyle";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchContacts } from "../redux/operations";
-// import { getContacts } from "../redux/selectors";
 import { getError, getIsLoading } from "../redux/selectors";
 
 import { Section } from './Section';
 import Form from './Form';
 import { ContactsList } from './ContactsList';
 import { Filter } from './Filter';
+import { Loader } from "./Loader"; 
 
 export default function App() {
   const dispatch = useDispatch();
   const isLoading = useSelector(getIsLoading);
   const error = useSelector(getError);
-  // Получаем части состояния
-  // const { items, isLoading, error } = useSelector(getContacts);
 
-  // Вызываем операцию
+  // === Запрос на бекэнд при монтировании страницы
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
@@ -35,7 +33,8 @@ export default function App() {
       <Section title="Contacts">
         <Filter />
         <ContactsList />
-        {isLoading && !error && <b>Request in progress...</b>}
+        {/* Показывать загрузчик пока не получен ответ бекэнда */}
+        {isLoading && !error && <Loader />}
       </Section>
 
     </div>

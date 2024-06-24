@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useDispatch } from "react-redux";
-// import { addContact } from "../../redux/contactsSlice";
 import { addContacts } from '../../redux/operations';
 
 import { FormData, FormLabel, FormLabelName, FormInputName } from './Form.styled';
@@ -10,14 +9,12 @@ export default function Form() {
     // === Получаем ссылку на функцию отправки экшенов
     const dispatch = useDispatch();
 
-
-    // === МОЙ КОД начало ========================================
     // === ХУКи состояния нового контакта
     const [id, setId] = useState(0);
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     
-    // // === Объект состояния
+    // // === Объект состояния нового контакта
     const state = {
         id,
         name,
@@ -40,30 +37,10 @@ export default function Form() {
         setId(shortid.generate()); 
     };
     
-    // === Добавление нового контакта
-    // const handleSubmit = event => {
-    //     event.preventDefault();
-    //     // Экшен нового контакта
-    //     // dispatch(addContact(state));
-    //     dispatch();
-    //     // Очистка формы после отправки данных
-    //     reset();
-    // }
-
-    // === Очистка формы
-    // const reset = () => {
-    //     setName('');
-    //     setNumber('');
-    // };
-    // МОЙ КОД конец =======================================================
-
-
+    // === Экшен добавления нового контакта
     const handleSubmit = event => {
         event.preventDefault();
-        // const form = event.target;
-        // dispatch(addContacts(event.target.elements.text.value));
         dispatch(addContacts(state));
-        // form.reset();
         reset();
         console.log("state: ", state);
     };

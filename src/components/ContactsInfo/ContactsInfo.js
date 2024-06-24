@@ -9,7 +9,6 @@ export const ContactsInfo = ({ contact }) => {
 
     // ==== Экшен удаления контакта
     const handleDelete = () => dispatch(deleteContacts(contact.id));
-    // const handleDelete = () => dispatch();
 
     return (
             <ContactListItem key={contact.id}>{contact.name}: {contact.phone}
