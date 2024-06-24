@@ -11,6 +11,9 @@ const filterSlice = createSlice({
         filterContact(state, action) {
             return state = action.payload.toLowerCase();
         },
+        // setStatusFilter(state, action) {
+        // state.status = action.payload;
+        // },
     },
 });
 

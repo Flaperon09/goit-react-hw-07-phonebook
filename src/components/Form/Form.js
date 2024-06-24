@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from "react-redux";
-import { addContact } from "../../redux/contactsSlice";
+// import { addContact } from "../../redux/contactsSlice";
+import { addContacts } from '../../redux/operations';
 
 import { FormData, FormLabel, FormLabelName, FormInputName } from './Form.styled';
 import shortid from 'shortid';
@@ -8,17 +9,19 @@ import shortid from 'shortid';
 export default function Form() {
     // === Получаем ссылку на функцию отправки экшенов
     const dispatch = useDispatch();
-    
+
+
+    // === МОЙ КОД начало ========================================
     // === ХУКи состояния нового контакта
     const [id, setId] = useState(0);
     const [name, setName] = useState('');
-    const [number, setNumber] = useState('');
+    const [phone, setPhone] = useState('');
     
-    // === Объект состояния
+    // // === Объект состояния
     const state = {
         id,
         name,
-        number,
+        phone,
     };
 
     // === Обновление state при вводе в <input>
@@ -29,7 +32,7 @@ export default function Form() {
                 setName(value);
                 break;
             case 'number':
-                setNumber(value);
+                setPhone(value);
                 break;
             default: return;
         };
@@ -38,20 +41,39 @@ export default function Form() {
     };
     
     // === Добавление нового контакта
+    // const handleSubmit = event => {
+    //     event.preventDefault();
+    //     // Экшен нового контакта
+    //     // dispatch(addContact(state));
+    //     dispatch();
+    //     // Очистка формы после отправки данных
+    //     reset();
+    // }
+
+    // === Очистка формы
+    // const reset = () => {
+    //     setName('');
+    //     setNumber('');
+    // };
+    // МОЙ КОД конец =======================================================
+
+
     const handleSubmit = event => {
         event.preventDefault();
-        // Экшен нового контакта
-        dispatch(addContact(state));
-        // Очистка формы после отправки данных
+        // const form = event.target;
+        // dispatch(addContacts(event.target.elements.text.value));
+        dispatch(addContacts(state));
+        // form.reset();
         reset();
-    }
+        console.log("state: ", state);
+    };
 
     // === Очистка формы
     const reset = () => {
         setName('');
-        setNumber('');
+        setPhone('');
     };
-
+            
         return (
             <div>
                 <FormData onSubmit={handleSubmit}>
@@ -72,7 +94,7 @@ export default function Form() {
                             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
                             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
                             required
-                            value={number} onChange={handleChange}
+                            value={phone} onChange={handleChange}
                             />
                     </FormLabel>
                     <button type="submit">Add contact</button>

@@ -1,16 +1,18 @@
 import { useDispatch } from "react-redux";
-import { deleteContact } from "../../redux/contactsSlice";
+import { deleteContacts } from "../../redux/operations";
 import { ContactListItem, ButtonDelete } from './ContactsInfo.styled';
+
 
 export const ContactsInfo = ({ contact }) => {
     // === Получаем ссылку на функцию отправки экшенов
     const dispatch = useDispatch();
 
     // ==== Экшен удаления контакта
-    const handleDelete = () => dispatch(deleteContact(contact.id));
+    const handleDelete = () => dispatch(deleteContacts(contact.id));
+    // const handleDelete = () => dispatch();
 
     return (
-            <ContactListItem key={contact.id}>{contact.name}: {contact.number}
+            <ContactListItem key={contact.id}>{contact.name}: {contact.phone}
                 <ButtonDelete onClick={handleDelete}>Delete</ButtonDelete>
             </ContactListItem>
     )
