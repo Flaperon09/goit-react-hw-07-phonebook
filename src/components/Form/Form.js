@@ -42,7 +42,6 @@ export default function Form() {
         event.preventDefault();
         dispatch(addContacts(state));
         reset();
-        console.log("state: ", state);
     };
 
     // === Очистка формы

@@ -9,7 +9,6 @@ export const fetchContacts = createAsyncThunk(
     try {
         // === HTTP-запрос
         const response = await axios.get("/contacts");
-        console.log("response.data: ", response.data);
         // === При успешном запросе возвращаем промис с данными
         return response.data;
     } catch (event) {
