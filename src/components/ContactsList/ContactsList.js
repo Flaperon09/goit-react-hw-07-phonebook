@@ -1,10 +1,10 @@
 import { ContactsInfo } from '../ContactsInfo';
 // import { useSelector } from "react-redux";
 
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+// import { useEffect } from "react";
+import { useSelector } from "react-redux";
 // import { fetchContacts } from "redux/operations";
-import { fetchContacts } from "../../redux/operations";
+// import { fetchContacts } from "../../redux/operations";
 import { getContacts } from '../../redux/selectors';
 // import { getContacts } from "redux/selectors";
 
