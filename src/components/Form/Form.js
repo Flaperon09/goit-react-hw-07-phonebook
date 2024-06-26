@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addContacts } from '../../redux/operations';
+import { getContacts } from '../../redux/selectors';
 
 import { FormData, FormLabel, FormLabelName, FormInputName } from './Form.styled';
 import shortid from 'shortid';
@@ -36,11 +37,21 @@ export default function Form() {
         // Генерация id контакта
         setId(shortid.generate()); 
     };
+
+    // === Забираем из store контакты
+    const items = useSelector(getContacts);
     
     // === Экшен добавления нового контакта
     const handleSubmit = event => {
         event.preventDefault();
-        dispatch(addContacts(state));
+        // Проверка наличия контакта
+        if (items.find(option => option.name.toLowerCase() === state.name.toLowerCase())) {
+            // Если контакт уже есть - выводим предупреждение
+            return alert(`${state.name} is already in contacts.`);
+        } else {
+            // Если контакта нет - отправляем контакт на бекэнд
+            dispatch(addContacts(state));
+        };
         reset();
     };
 
